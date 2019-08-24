@@ -32,9 +32,10 @@ public class HousingUnitDTO {
 		this.adress = new AddressDTO(unit.getAdress());
 		this.type = new UnitTypeDTO(unit.getType());
 		this.options = new ArrayList<OptionDTO>();
-		for(BonusOptionUnit join : unit.getOptionJoins()) {
-			this.options.add(new OptionDTO(join));
-		}
+		if(unit.getOptionJoins() != null)
+			for(BonusOptionUnit join : unit.getOptionJoins()) {
+				this.options.add(new OptionDTO(join));
+			}
 	}
 
 	public Long getId() {
