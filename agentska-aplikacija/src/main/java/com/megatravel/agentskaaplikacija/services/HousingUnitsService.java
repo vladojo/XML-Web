@@ -60,9 +60,9 @@ public class HousingUnitsService {
 		return unit;
 	}
 
-	public List<HousingUnit> search(String country, String city, int people, Date start, Date end) {
+	public List<HousingUnit> search(String country, String city, Integer people, Date start, Date end) {
 		List<HousingUnit> units = this.housingUnitsRepository.findAll();
-		if(country == null || city == null || people < 1 || start == null || end == null) {
+		if(country == null || city == null || people == null || start == null || end == null) {
 			return units;
 		} else {
 			List<HousingUnit> result = new ArrayList<HousingUnit>();
@@ -77,7 +77,7 @@ public class HousingUnitsService {
 		}
 	}
 	
-	private boolean unitIsFree(HousingUnit unit, Date start, Date end) {
+	public boolean unitIsFree(HousingUnit unit, Date start, Date end) {
 		for(Reservation reservation : unit.getReservations()) {
 			Date first = reservation.getStart();
 			Date last = reservation.getEnd();
@@ -121,6 +121,15 @@ public class HousingUnitsService {
 			join.setOption(option);
 			join.setUnit(unit);
 			this.optionUnitJoinRepository.save(join);
+		}
+	}
+	
+	public List<Reservation> getReservationsOfHousingUnit(Long id) {
+		Optional<HousingUnit> unit = this.housingUnitsRepository.findById(id);
+		if(unit.isPresent()) {
+			return unit.get().getReservations();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
 	
