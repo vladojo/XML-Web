@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.megatravel.com/ocena/soap"
+	targetNamespace="http://www.megatravel.com/ocena/soap"
+	elementFormDefault="qualified">
+	<xs:element name="allRatingsRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="allRatingsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="ratings" type="tns:RatingDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RatingDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="value" type="xs:int" />
+			<xs:element name="reservation" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
