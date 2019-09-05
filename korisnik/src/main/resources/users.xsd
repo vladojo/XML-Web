@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.megatravel.com/korisnik/soap"
+	targetNamespace="http://www.megatravel.com/korisnik/soap"
+	elementFormDefault="qualified">
+	<xs:element name="allUsersRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="allUsersResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="users" type="tns:UserDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="UserDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="firstName" type="xs:string" />
+			<xs:element name="lastName" type="xs:string" />
+			<xs:element name="email" type="xs:string" />
+			<xs:element name="password" type="xs:string" />
+			<xs:element name="state" type="tns:UserState" />
+			<xs:element name="type" type="tns:UserType" />
+			<xs:element name="workCertificateNumber" type="xs:string"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="UserState">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACTIVE" />
+			<xs:enumeration value="BLOCKED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AGENT" />
+			<xs:enumeration value="ADMIN" />
+			<xs:enumeration value="USER" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="agentLoginRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="email" type="xs:string" />
+				<xs:element name="password" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="agentLoginResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="valid" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

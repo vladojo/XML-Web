@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.megatravel.com/smestaj/soap"
+	targetNamespace="http://www.megatravel.com/smestaj/soap"
+	elementFormDefault="qualified">
+	<xs:element name="allReservationsRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="allReservationsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="reservations" type="tns:ReservationDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ReservationDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="realised" type="xs:boolean" />
+			<xs:element name="price" type="xs:double" />
+			<xs:element name="start" type="xs:dateTime" />
+			<xs:element name="end" type="xs:dateTime" />
+			<xs:element name="unit" type="xs:long" />
+			<xs:element name="user" type="xs:long" minOccurs="0"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="allUnitsRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="allUnitsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="units" type="tns:HousingUnitDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="HousingUnitDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="agent" type="xs:long" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="allowedPeople" type="xs:int" />
+			<xs:element name="daysForCancelling" type="xs:int" />
+			<xs:element name="allowedCancelling" type="xs:boolean" />
+			<xs:element name="price" type="xs:double" />
+			<xs:element name="rating" type="xs:double" />
+			<xs:element name="address" type="tns:AddressDTO" />
+			<xs:element name="type" type="tns:TypeDTO" />
+			<xs:element name="options" type="tns:OptionDTO"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="allTypesRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="allTypesResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="types" type="tns:TypeDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="TypeDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="name" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="country" type="xs:string" />
+			<xs:element name="city" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="allOptionsRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="allOptionsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+					name="options" type="tns:OptionDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="OptionDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="createUnitRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="unit" type="tns:HousingUnitDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createUnitResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="success" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createReservationRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="reservation" type="tns:ReservationDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createReservationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="success" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="confirmReservationRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="reservation" type="xs:long" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="confirmReservationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="success" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
