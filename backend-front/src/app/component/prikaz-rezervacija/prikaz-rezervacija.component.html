@@ -1,0 +1,34 @@
+<app-meni-bar></app-meni-bar>
+
+<div class="container">
+  <div class="container justify-content-md-center">
+    <div class="col-lg-12 p-0">
+      <a class="list-group-item" style="min-height: 220px; max-height: 350px;" *ngFor = "let i = index; let accommodationReservation of accommodationToShow">
+          <div class="col-lg-12">
+              <div class="col-lg-6">
+                <div style="display: inline-flex; width: 100%;">
+                  <h4 class="col-lg-11">{{accommodationReservation.unit.adress.country}} - {{accommodationReservation.unit.adress.city}}</h4>
+                    
+                </div>
+                <div style="display: inline-flex; width: 100%;">
+                  <h4 class="list-group-item-text col-lg-11">{{accommodationReservation.start}} - {{accommodationReservation.end}}</h4>
+                </div>
+                <label class="list-group-item-text col-lg-10">{{accommodationReservation.unit.description}}</label>
+                <h4 class="list-group-item-text col-lg-12">{{accommodationReservation.unit.type.name}}</h4>
+              </div>
+              <div class="col-lg-6 offset-md-6">
+                  <h3 class="col-lg-12" style="max-width: 100%; text-align: right;"><i>Rating:</i> <b>{{accommodationReservation.unit.rating}}</b></h3>   
+                  <h3 class="col-lg-12" style="text-align: right;"> <i>Price:</i> <b>{{accommodationReservation.price}} USD</b></h3>
+                  <div *ngIf="accommodationReservation.realised" class="col-lg-12" style="text-align: end;">
+                    <input type="number" min="1" max="5" [(ngModel)]="pomOcena">
+                    <button class="btn btn-primary" (click) = "oceni(accommodationReservation)" >Rate</button>
+                  </div>
+                  <div *ngIf="!accommodationReservation.realised" class="col-lg-12" style="text-align: end;">
+                    <button class="btn btn-primary" (click) = "cancel(accommodationReservation)" >Cancel</button>
+                  </div>
+              </div>
+          </div>
+      </a>
+    </div>
+  </div>
+</div>

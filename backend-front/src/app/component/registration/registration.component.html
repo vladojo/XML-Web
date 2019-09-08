@@ -1,0 +1,68 @@
+<app-meni-bar></app-meni-bar>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+  <div class="container register">
+    <div class="row justify-content-md-center">
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h1 class="register-heading">Register</h1>
+                    <form class="row register-form" #formRegister="ngForm">
+                        <div class="col-md-10">
+                          
+                            <div class="form-group">
+                              <input type="email" minlength="10" maxlength="60" [(ngModel)]="user.email" #email="ngModel" name="email" id="email" class="input text-danger" placeholder="Email" value="">
+                              <small [hidden]="email.valid || (email.pristine && !formRegister.submitted)"  class="input text-danger">
+                               Email is required
+                               </small>
+                               <small [hidden]="mailNotUnique"  class="text-danger">
+                                Email already exist
+                                </small>
+                            </div>
+                            <div class="form-group">
+                              <input type="password" minlength="3" maxlength="30" [(ngModel)]="user.password" name="password" id="password" class="input pass" placeholder="Password"  
+                                validateEqual="confirmPassword" #password="ngModel" minlength="3">       
+                              <small [hidden]="password.valid || (password.pristine && !formRegister.submitted)" class="input text-danger">
+                                Password is required. Minimum 12 characters.
+                              </small>
+                            </div>
+
+                            <div class="form-group">
+                              <input type="text" minlength="3"  maxlength="30" #uname="ngModel" [(ngModel)]="user.firstName" name="name" id="name"  class="input pass" placeholder="Name" value="">
+                              <small [hidden]="uname.valid || (uname.pristine && !formRegister.submitted)"  class="input text-danger">
+                               Name is required
+                              </small>
+                            </div>
+                            <div class="form-group">
+                              <input type="text" minlength="3"  maxlength="30" #lastName="ngModel" [(ngModel)]="user.lastName" name="lastName" id="lastName"  class="input pass" placeholder="Last name">
+                              <small [hidden]="lastName.valid || (lastName.pristine && !formRegister.submitted)"  class="input text-danger">
+                                Last name is required
+                               </small>
+                            </div>
+                            <div *ngIf = "!postojiDugme">
+                            <div  class="form-group">
+                              <input type="text" minlength="3"  maxlength="30" #workNumber="ngModel" [(ngModel)]="user.workCertificateNumber" name="workNumber" id="workNumber"  class="input pass" placeholder="Work certificate number">
+                            </div>
+                            <div  class="form-group">
+                              <input type="text" minlength="3"  maxlength="30" #grad="ngModel" [(ngModel)]="user.address.city" name="grad" id="grad"  class="input pass" placeholder="City">
+                            </div>
+                            <div  class="form-group">
+                              <input type="text" minlength="3"  maxlength="30" #workNumber="ngModel" [(ngModel)]="user.address.country" name="zemlja" id="zemlja"  class="input pass" placeholder="Country">
+                            </div>
+                            <div  class="form-group">
+                                <input type="text" minlength="3"  maxlength="30" #number="ngModel" [(ngModel)]="user.address.number" name="number" id="number"  class="input pass" placeholder="Number">
+                              </div>
+                          </div>
+                            <div class="form-group">
+                                  <input type="button" (click)="register()" name="register-submit" id="register-submit" class="inputButton" value="Register">
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      </div>
+      </div>

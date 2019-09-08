@@ -1,0 +1,83 @@
+
+
+<app-meni-bar></app-meni-bar>
+
+          <div class="container">
+              <div class="row">
+
+                <div class="col-md-6" style="padding-left: 100px;">
+                  <h3 class="">Create Unit Type</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" [(ngModel)] = "newUnitType.name" placeholder="Name" value="" />
+                        <input type="submit" class="btn btn-success float-right" style="width: 200px;" (click) = "addUnitType()"  value="Add"/>
+                    </div>
+
+                  <div style="padding-top: 100px;" class=" fixed-table-body">
+                      <table id="grid" class="table table-striped table-hover" data-toolbar="#toolbargrid" data-pagination="true" data-search="true">
+                        <thead>
+                          <tr>
+                            <th class="text-left" style="">
+                              <div class="th-inner sortable">Unit Type</div>
+                              <div class="fht-cell"></div>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let i = index; let unit of unitTypes">
+                            <td class="text-left" style="">{{unit.name}}</td>
+                            <td><button class="btn btn-danger" (click)="deleteUnitType(unit)">Delete</button>
+                            <button class="btn btn-primary" (click)="editUnitType(unit)">Edit</button></td>
+                          </tr>
+                        </tbody>
+                        <tfoot></tfoot>
+                      </table>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-6" style="padding-left: 100px;">
+                      <div class="">
+                          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                              <h3 class="">Create option</h3>
+                              <div class=" register-form justify-content-md-center">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" [(ngModel)] = "newOption.name" placeholder="Name" value="" />
+                                    <input type="text" class="form-control" [(ngModel)] = "newOption.description" placeholder="Description" value="" />
+                                    <input type="submit" class="btn btn-success float-right" style="width: 200px;" (click) = "addOption()" value="Add"/>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+            
+                    <div style="padding-top: 100px;" class="fixed-table-body">
+                        <table id="grid"  class="table table-striped table-hover" data-toolbar="#toolbargrid" data-pagination="true" data-search="true">
+                          <thead>
+                            <tr>
+                              <th class="text-left" style="">
+                                <div class="th-inner sortable">Option</div>
+                                <div class="fht-cell"></div>
+                              </th>
+                              <th class="text-left" style="">
+                                  <div class="th-inner sortable">Description</div>
+                                  <div class="fht-cell"></div>
+                                </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor = "let i = index; let option of options">
+                              <td class="text-left" style="">{{option.name}}</td>
+                              <td class="text-left" style="">{{option.description}}</td>
+                              <td><button class="btn btn-danger" (click)="deleteOption(option)">Delete</button>
+                              <button class="btn btn-primary float-right" (click)="editOption(option)">Edit</button></td>
+                            </tr>
+                          </tbody>
+                          <tfoot></tfoot>
+                        </table>
+                     </div>
+
+                  </div>
+
+
+                </div>
+          </div>
+  

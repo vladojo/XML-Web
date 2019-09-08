@@ -1,0 +1,52 @@
+<app-meni-bar></app-meni-bar>
+
+<div class="container">
+    <div class="row">
+        <div class="card col-sm-4 " style="overflow:scroll;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"  *ngFor = "let i = index; let chat of inboxKorisnika" (click) = "changeActiveChat(chat)">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><i>{{chat.firstName}} {{chat.lastName}}</i></h5>
+                </div>
+                <p>{{chat.email}}</p>
+            </li>
+          </ul>
+        </div>
+  
+        
+        <div class="col-sm-8">
+          <div class="chatbody">      
+            <div class="msg_history">
+              <div *ngFor = "let i = index; let message of chat | paginate: { itemsPerPage: 20, currentPage: p }">
+                <div *ngIf = "!loggedUsersMessage(message)" class="incoming_msg">
+                  
+                  <div class="received_msg">
+                    <div class="container">
+                        <div> <img  class="right" src="assets/message.png" alt="nema"> </div>
+                      <p>{{message.content}}</p>
+                      <span class="time-left">{{message.createdTime}}</span></div>
+                  </div>
+                </div>
+                <div *ngIf = "loggedUsersMessage(message)" class="outgoing_msg">
+                  <div class="container">
+                      <div> <img  class="left" src="assets/message.png" alt="nema"> </div>
+                    <p>{{message.content}}</p>
+                    <span class="time-right">{{message.createdTime}}</span> </div>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+  
+          <div class="row">
+            <div class="col-xs-9">
+              <input type="text" placeholder="Message..." class="form-control" [(ngModel)]="newMessage.content" />
+            </div>
+            <div class="col-xs-3">
+              <button class="btn btn-info btn-block" (click)="sendMessage()">Send</button>
+            </div>
+          </div>
+  
+        </div>
+    </div>
+  </div>

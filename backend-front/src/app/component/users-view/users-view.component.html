@@ -1,0 +1,22 @@
+<app-meni-bar></app-meni-bar>
+
+<div class="container">
+ <div class="list-group">
+    <a *ngFor = "let i = index; let user of users | paginate: { itemsPerPage: 10, currentPage: p }" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Email: {{user.email}}</h5>
+      </div>
+                    
+      <p class="mb-1">First Name: {{user.firstName}}</p>
+      <small>Last Name: {{user.lastName}}</small>
+      <div class="col-lg-12" style="text-align: end;">
+            <button *ngIf = "user.state == 'ACTIVE' && user.id != loggedUser.id" class="btn btn-secondary" (click)="changeStateOfUser(user, 'BLOCKED')">Block</button>
+            <button  *ngIf = "user.state != 'ACTIVE'" class="btn btn-danger" (click)="changeStateOfUser(user, 'BLOCKED')">Remove</button>
+            <button *ngIf = "user.state != 'ACTIVE'" class="btn btn-success" (click)="changeStateOfUser(user, 'ACTIVE')">Activate</button>
+        </div>
+    </a>
+    <div class="item col-lg-10 col-lg-10" style="width: 100%; text-align: center;">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+  </div>
+</div>
