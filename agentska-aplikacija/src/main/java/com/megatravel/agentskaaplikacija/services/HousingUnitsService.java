@@ -19,11 +19,14 @@ import com.megatravel.agentskaaplikacija.model.BonusOption;
 import com.megatravel.agentskaaplikacija.model.BonusOptionUnit;
 import com.megatravel.agentskaaplikacija.model.Reservation;
 import com.megatravel.agentskaaplikacija.model.UnitType;
+import com.megatravel.agentskaaplikacija.model.User;
 import com.megatravel.agentskaaplikacija.repositories.AddressRepository;
 import com.megatravel.agentskaaplikacija.repositories.HousingUnitsRepository;
 import com.megatravel.agentskaaplikacija.repositories.OptionRepository;
 import com.megatravel.agentskaaplikacija.repositories.OptionUnitJoinRepository;
 import com.megatravel.agentskaaplikacija.repositories.UnitTypesRepository;
+import com.megatravel.agentskaaplikacija.repositories.UserRepository;
+import com.megatravel.agentskaaplikacija.soap.communication.SmestajCommunication;
 
 @Service
 public class HousingUnitsService {
@@ -43,7 +46,14 @@ public class HousingUnitsService {
 	@Autowired
 	private OptionRepository optionRepository;
 	
-	public HousingUnit create(HousingUnitDTO housingUnitDTO) {
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private SmestajCommunication smestajCommunication;
+	
+	public HousingUnit create(HousingUnitDTO housingUnitDTO, Long agentId) {
+		User agent = this.findAgent(agentId);
 		HousingUnit unit = new HousingUnit();
 		unit.setDaysForCancelling(housingUnitDTO.getDaysForCancelling());
 		unit.setAllowedPeople(housingUnitDTO.getAllowedPeople());
@@ -55,8 +65,10 @@ public class HousingUnitsService {
 		UnitType type = this.findTypeById(housingUnitDTO.getType().getId());
 		unit.setType(type);
 		unit.setAdress(address);
+		unit.setAgent(agent);
 		this.housingUnitsRepository.save(unit);
 		this.createJoins(housingUnitDTO.getOptions(), unit);
+		this.smestajCommunication.addUnit(housingUnitDTO, agentId);
 		return unit;
 	}
 
@@ -131,6 +143,26 @@ public class HousingUnitsService {
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	private User findAgent(Long id) {
+		Optional<User> agent = this.userRepository.findById(id);
+		if(!agent.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		} else {
+			return agent.get();
+		}
+	}
+
+	public List<HousingUnit> getAgentsUnits(Long agent) {
+		List<HousingUnit> units = this.housingUnitsRepository.findAll();
+		List<HousingUnit> result = new ArrayList<HousingUnit>();
+		for(HousingUnit unit : units) {
+			if(unit.getAgent().getId().equals(agent)) {
+				result.add(unit);
+			}
+		}
+		return result;
 	}
 	
 }

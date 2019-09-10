@@ -10,7 +10,7 @@ export class HousingUnit{
 	allowedCancelling: boolean;
     price: number;
     rating: number;
-    address: Address;
+    adress: Address;
     type: UnitType;
     options: Option[];
 
@@ -22,7 +22,7 @@ export class HousingUnit{
         this.daysForCancelling = undefined;
         this.price = undefined;
         this.rating= 0;
-        this.address = new Address();
+        this.adress = new Address();
         this.type = new UnitType();
         this.options = [];
     }

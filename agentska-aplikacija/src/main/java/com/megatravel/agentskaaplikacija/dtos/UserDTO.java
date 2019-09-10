@@ -27,7 +27,7 @@ public class UserDTO {
 		this.state = user.getState();
 		this.type = user.getType();
 		this.workCertificateNumber = user.getWorkCertificateNumber();
-		if(user.getType().equals(UserType.AGENT)) {
+		if(user.getAddress() != null) {
 			this.address = new AddressDTO(user.getAddress());
 		}
 	}

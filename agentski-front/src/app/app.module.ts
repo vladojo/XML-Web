@@ -24,12 +24,17 @@ import { AddHousingUnitComponent } from './component/add-housing-unit/add-housin
 import { HousingUnitService } from './service/housing-unit.service';
 import { MessagesComponent } from './component/messages/messages.component';
 import { MessageService } from './service/message.service';
+import { ReservationsComponent } from './component/reservations/reservations.component';
+import { ViewHousingUnitsComponent } from './component/view-housing-units/view-housing-units.component';
+import { MeniBarComponent } from './component/meni-bar/meni-bar.component';
 
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'housing-unit-add', component: AddHousingUnitComponent },
+  { path: 'housing-unit-view', component: ViewHousingUnitsComponent },
+  { path: 'reservations', component: ReservationsComponent },
   { path: 'messages', component: MessagesComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' }, 
   { path: '**', component: PageNotFoundComponent }
@@ -42,6 +47,9 @@ const appRoutes: Routes = [
     LoginComponent,
     AddHousingUnitComponent,
     MessagesComponent,
+    ReservationsComponent,
+    ViewHousingUnitsComponent,
+    MeniBarComponent,
   ],
   imports: [
     BrowserModule,

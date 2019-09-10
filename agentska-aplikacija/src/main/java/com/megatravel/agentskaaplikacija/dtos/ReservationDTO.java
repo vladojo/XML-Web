@@ -24,7 +24,8 @@ public class ReservationDTO {
     	this.start = reservation.getStart().toString();
     	this.end = reservation.getEnd().toString();
     	this.realised = reservation.isRealised();
-    	this.user = new UserDTO(reservation.getUser());
+    	if(reservation.getUser() != null)
+    		this.user = new UserDTO(reservation.getUser());
     	if(reservation.getRating() != null)
     		this.rating = new RatingDTO(reservation.getRating());
     	this.unit = new HousingUnitDTO(reservation.getUnit());

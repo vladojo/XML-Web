@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +22,6 @@ import com.megatravel.agentskaaplikacija.model.HousingUnit;
 import com.megatravel.agentskaaplikacija.services.HousingUnitsService;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class HousingUnitsController {
 
 	@Autowired
@@ -55,12 +53,24 @@ public class HousingUnitsController {
 		}
 	}
 	
+	@RequestMapping(method = RequestMethod.GET,
+			value = "/rest/units",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<HousingUnitDTO>> getAgentsUnits(@RequestParam("agent") Long agent) {
+		List<HousingUnitDTO> results = new ArrayList<HousingUnitDTO>();
+		for(HousingUnit unit : this.housingUnitsService.getAgentsUnits(agent)) {
+			results.add(new HousingUnitDTO(unit));
+		}
+		return new ResponseEntity<List<HousingUnitDTO>>(results, HttpStatus.OK);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST,
 			value = "/rest/units",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HousingUnitDTO> create(@RequestBody HousingUnitDTO housingUnitDTO) {
-		return new ResponseEntity<HousingUnitDTO>(new HousingUnitDTO(this.housingUnitsService.create(housingUnitDTO)), HttpStatus.CREATED);
+	public ResponseEntity<HousingUnitDTO> create(@RequestBody HousingUnitDTO housingUnitDTO,
+			@RequestParam("agent") Long agent) {
+		return new ResponseEntity<HousingUnitDTO>(new HousingUnitDTO(this.housingUnitsService.create(housingUnitDTO, agent)), HttpStatus.CREATED);
 	}
 	
 }

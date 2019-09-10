@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.megatravel.com/ocena/soap" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.megatravel.com/ocena/soap" targetNamespace="http://www.megatravel.com/ocena/soap">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.megatravel.com/ocena/soap">
+            <xs:element name="allRatingsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+			</xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="allRatingsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="ratings" type="tns:RatingDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="RatingDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="value" type="xs:int"/>
+                    <xs:element name="reservation" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="allRatingsRequest">
+        <wsdl:part element="tns:allRatingsRequest" name="allRatingsRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="allRatingsResponse">
+        <wsdl:part element="tns:allRatingsResponse" name="allRatingsResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="RatingsPort">
+        <wsdl:operation name="allRatings">
+            <wsdl:input message="tns:allRatingsRequest" name="allRatingsRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:allRatingsResponse" name="allRatingsResponse">
+    </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RatingsPortSoap11" type="tns:RatingsPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="allRatings">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="allRatingsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="allRatingsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="RatingsPortService">
+        <wsdl:port binding="tns:RatingsPortSoap11" name="RatingsPortSoap11">
+            <soap:address location="http://localhost:8082/ocena/services"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

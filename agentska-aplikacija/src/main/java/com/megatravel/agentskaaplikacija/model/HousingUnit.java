@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class HousingUnit {
     private UnitType type;
     @OneToMany(mappedBy = "unit")
     private List<BonusOptionUnit> optionJoins;
-    @OneToMany(mappedBy = "unit")
+    @OneToMany(mappedBy = "unit", fetch = FetchType.EAGER)
     private List<Reservation> reservations;
     
     public HousingUnit() { }

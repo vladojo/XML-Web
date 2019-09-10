@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.megatravel.com/smestaj/soap" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.megatravel.com/poruka/soap" targetNamespace="http://www.megatravel.com/poruka/soap">
+    <wsdl:types>
+        <xs:schema xmlns:tns="http://www.megatravel.com/smestaj/soap" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.megatravel.com/smestaj/soap">
+            <xs:element name="allReservationsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+			</xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="allReservationsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="reservations" type="tns:ReservationDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="ReservationDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="realised" type="xs:boolean"/>
+                    <xs:element name="price" type="xs:double"/>
+                    <xs:element name="start" type="xs:dateTime"/>
+                    <xs:element name="end" type="xs:dateTime"/>
+                    <xs:element name="unit" type="xs:long"/>
+                    <xs:element maxOccurs="1" minOccurs="0" name="user" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="allUnitsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+			</xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="allUnitsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="units" type="tns:HousingUnitDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="HousingUnitDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="agent" type="xs:long"/>
+                    <xs:element name="description" type="xs:string"/>
+                    <xs:element name="allowedPeople" type="xs:int"/>
+                    <xs:element name="daysForCancelling" type="xs:int"/>
+                    <xs:element name="allowedCancelling" type="xs:boolean"/>
+                    <xs:element name="price" type="xs:double"/>
+                    <xs:element name="rating" type="xs:double"/>
+                    <xs:element name="address" type="tns:AddressDTO"/>
+                    <xs:element name="type" type="tns:TypeDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="options" type="tns:OptionDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="allTypesRequest">
+                <xs:complexType>
+                    <xs:sequence>
+			</xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="allTypesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="types" type="tns:TypeDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="TypeDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="name" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AddressDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="country" type="xs:string"/>
+                    <xs:element name="city" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="allOptionsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+			</xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="allOptionsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="options" type="tns:OptionDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="OptionDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="description" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="createUnitRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="unit" type="tns:HousingUnitDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createUnitResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="success" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createReservationRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="reservation" type="tns:ReservationDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createReservationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="success" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="allOptionsResponse">
+        <wsdl:part element="sch:allOptionsResponse" name="allOptionsResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createReservationRequest">
+        <wsdl:part element="sch:createReservationRequest" name="createReservationRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="allOptionsRequest">
+        <wsdl:part element="sch:allOptionsRequest" name="allOptionsRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createReservationResponse">
+        <wsdl:part element="sch:createReservationResponse" name="createReservationResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="allReservationsResponse">
+        <wsdl:part element="sch:allReservationsResponse" name="allReservationsResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="allReservationsRequest">
+        <wsdl:part element="sch:allReservationsRequest" name="allReservationsRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createUnitResponse">
+        <wsdl:part element="sch:createUnitResponse" name="createUnitResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="allUnitsRequest">
+        <wsdl:part element="sch:allUnitsRequest" name="allUnitsRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="allUnitsResponse">
+        <wsdl:part element="sch:allUnitsResponse" name="allUnitsResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createUnitRequest">
+        <wsdl:part element="sch:createUnitRequest" name="createUnitRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="allTypesRequest">
+        <wsdl:part element="sch:allTypesRequest" name="allTypesRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="allTypesResponse">
+        <wsdl:part element="sch:allTypesResponse" name="allTypesResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="MessagesPort">
+        <wsdl:operation name="allOptions">
+            <wsdl:input message="tns:allOptionsRequest" name="allOptionsRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:allOptionsResponse" name="allOptionsResponse">
+    </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createReservation">
+            <wsdl:input message="tns:createReservationRequest" name="createReservationRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:createReservationResponse" name="createReservationResponse">
+    </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allReservations">
+            <wsdl:input message="tns:allReservationsRequest" name="allReservationsRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:allReservationsResponse" name="allReservationsResponse">
+    </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createUnit">
+            <wsdl:input message="tns:createUnitRequest" name="createUnitRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:createUnitResponse" name="createUnitResponse">
+    </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allUnits">
+            <wsdl:input message="tns:allUnitsRequest" name="allUnitsRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:allUnitsResponse" name="allUnitsResponse">
+    </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allTypes">
+            <wsdl:input message="tns:allTypesRequest" name="allTypesRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:allTypesResponse" name="allTypesResponse">
+    </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MessagesPortSoap11" type="tns:MessagesPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="allOptions">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="allOptionsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="allOptionsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createReservation">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="createReservationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createReservationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allReservations">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="allReservationsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="allReservationsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createUnit">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="createUnitRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createUnitResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allUnits">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="allUnitsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="allUnitsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="allTypes">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="allTypesRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="allTypesResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MessagesPortService">
+        <wsdl:port binding="tns:MessagesPortSoap11" name="MessagesPortSoap11">
+            <soap:address location="http://localhost:8082/smestaj/services"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

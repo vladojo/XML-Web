@@ -35,9 +35,6 @@ export class AddHousingUnitComponent implements OnInit {
 }
 
   ngOnInit() {
-    // if(localStorage.getItem('newAccommodation') != null){
-    //   this.accommodation = JSON.parse(localStorage.getItem('newAccommodation'));
-    // }
     this.dropdownSettingsAdditionalServices = {
       singleSelection: false,
       itemsShowLimit: 3,
@@ -94,12 +91,9 @@ export class AddHousingUnitComponent implements OnInit {
         this.accommodation.allowedCancelling = true;
       }
 
-      //TODO: pozovi metodu da sacuva to
-      //localStorage.setItem('newAccommodation', JSON.stringify(this.accommodation));
-
       this.accommodationService.add(this.accommodation, this.loggedUser.id).subscribe(
         succ => {
-          this.router.navigate(['housing-units']);
+          this.router.navigate(['housing-unit-view']);
         }
       )
 
@@ -109,11 +103,11 @@ export class AddHousingUnitComponent implements OnInit {
 
 
   inputOk(){
-    if(this.accommodation.address.country == ""){
+    if(this.accommodation.adress.country == ""){
       alert("You must enter country for housing unit");
       return false;
     }
-    if(this.accommodation.address.city == ""){
+    if(this.accommodation.adress.city == ""){
       alert("You must enter city for  housing unit");
       return false;
     }

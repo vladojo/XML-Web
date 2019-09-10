@@ -24,8 +24,7 @@ export class MessagesComponent implements OnInit {
     private authService: AuthService, private chatService: MessageService) {
     let res: User = JSON.parse(localStorage.getItem('korisnik'));
     if(res != null){
-       this.loggedUser = res; //this.authService.getUsername(res);
-      // //this.chat.messages = [];
+       this.loggedUser = res;
     }
    }
 
@@ -54,7 +53,6 @@ export class MessagesComponent implements OnInit {
   sendMessage(){
     let d = new Date();
     let datestring = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2) 
-    //this.newMessage.createdTime = datestring;
     this.newMessage.sender.id = this.loggedUser.id;
     this.chat.forEach(element =>
       {
@@ -72,7 +70,7 @@ export class MessagesComponent implements OnInit {
 
   changeActiveChat(chat:User){  //da promeni korisnika
     this.chat = chat.messages;
-    this.newMessage.receiver = chat.messages[0].sender;
+    this.newMessage.sender = chat.messages[0].sender;
     this.chatService.getMessages(this.loggedUser.id, chat.id).subscribe(
       s => {
         this.chat = s;

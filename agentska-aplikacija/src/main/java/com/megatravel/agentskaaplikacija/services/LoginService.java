@@ -11,29 +11,34 @@ import com.megatravel.agentskaaplikacija.dtos.LoginRequestDTO;
 import com.megatravel.agentskaaplikacija.model.User;
 import com.megatravel.agentskaaplikacija.model.UserType;
 import com.megatravel.agentskaaplikacija.repositories.UserRepository;
+import com.megatravel.agentskaaplikacija.soap.communication.KorisnikCommunication;
 
 @Service
 public class LoginService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private KorisnikCommunication korisnikCommunication;
+	
+	@Autowired
+	private SyncService syncService;
 	
 	public User login(LoginRequestDTO loginRequestDTO) {
 		String email = loginRequestDTO.getEmail();
 		String password = loginRequestDTO.getPassword();
 		List<User> users = this.userRepository.findAll();
 		for(User user : users) {
-			if(user.getType().equals(UserType.AGENT)) {
-				if(user.getEmail().equals(email)) {
-					if(user.getPassword().equals(password)) {
-						return user;
-					} else {
-						throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-					}
-				}
+			if(user.getEmail().contentEquals(email) &&
+					user.getType().equals(UserType.AGENT) &&
+					user.getPassword().contentEquals(password) &&
+					korisnikCommunication.loginAgent(email, password)) {
+				syncService.sync();
+				return user;
 			}
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 	}
-	
+
 }

@@ -1,3 +1,5 @@
+<app-meni-bar></app-meni-bar>
+
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
 <div class="container register">
@@ -7,15 +9,15 @@
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                   <h1 class="register-heading">Add Housing Unit</h1>
                   <form class="row register-form" #formAddAccommodation="ngForm">
-                      <div class="col-md-10">
+                      <div class="col-md-14">
                           <div class="form-group">
-                              <input type="text" class="form-control" [(ngModel)] = "accommodation.address.country" placeholder="Country" name = "country"  #country="ngModel" value="" required minlength="3" maxlength="20"/>
+                              <input type="text" class="form-control" [(ngModel)] = "accommodation.adress.country" placeholder="Country" name = "country"  #country="ngModel" value="" required minlength="3" maxlength="20"/>
                           </div>
                           <small [hidden]="country.valid || (country.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
                             Country is required
                             </small>
                           <div class="form-group">
-                              <input type="text" class="form-control" [(ngModel)] = "accommodation.address.city" placeholder="City" value=""  name = "city"  #city="ngModel" value="" required minlength="3" maxlength="20" />
+                              <input type="text" class="form-control" [(ngModel)] = "accommodation.adress.city" placeholder="City" value=""  name = "city"  #city="ngModel" value="" required minlength="3" maxlength="20" />
                           </div>
                           <small [hidden]="city.valid || (city.pristine && !formAddAccommodation.submitted)"  class="input text-danger">
                             City is required
@@ -41,17 +43,17 @@
                           Price is required.  
                         </small>
                           <div class="form-group">
-                              <ng-multiselect-dropdown  [placeholder]="'Accommodation type'" [settings]="dropdownSettingsAccommodationType" [data]="accommodationTypeDropDown" [(ngModel)] = "selectedAccommodationType" [ngModelOptions]="{standalone: true}">
+                              <ng-multiselect-dropdown  [placeholder]="'Type'" [settings]="dropdownSettingsAccommodationType" [data]="accommodationTypeDropDown" [(ngModel)] = "selectedAccommodationType" [ngModelOptions]="{standalone: true}">
                               </ng-multiselect-dropdown>
                           </div>
                           <div class="form-group">
-                              <ng-multiselect-dropdown  [placeholder]="'Additional services'" [settings]="dropdownSettingsAdditionalServices" [data]="additionalServicesDropDown" [(ngModel)] = "selectAdditionalServices" [ngModelOptions]="{standalone: true}">
+                              <ng-multiselect-dropdown  [placeholder]="'Option'" [settings]="dropdownSettingsAdditionalServices" [data]="additionalServicesDropDown" [(ngModel)] = "selectAdditionalServices" [ngModelOptions]="{standalone: true}">
                               </ng-multiselect-dropdown>
                           </div>
                           <div class="form-group">
                               <input type="text" class="form-control" [(ngModel)] = "accommodation.daysForCancelling" placeholder="Cancellation days" value="" name="cancellationDays"/>
                           </div>
-                          <input type="submit" class="btn btn-outline-primary btn-lg" (click) = "managePrices()" [disabled]="!formAddAccommodation.valid"  value="Manage prices"/>
+                          <input type="submit" class="btn btn-outline-primary btn-lg" (click) = "managePrices()" [disabled]="!formAddAccommodation.valid"  value="ADD"/>
                       </div>
                   </form>
               </div>

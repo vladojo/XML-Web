@@ -22,7 +22,6 @@ export class AuthService {
 
     logout(): void {
       localStorage.removeItem('korisnik');
-      localStorage.removeItem('newAccommodation');
       this.router.navigate(['login']);
     }
 

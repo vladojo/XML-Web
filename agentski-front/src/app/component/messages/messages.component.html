@@ -1,3 +1,5 @@
+<app-meni-bar></app-meni-bar>
+
 <div class="container">
   <div class="row">
       <div class="card col-sm-4 " style="overflow:scroll;">
@@ -7,7 +9,6 @@
                   <h5 class="mb-1"><i>{{chat.firstName}} {{chat.lastName}}</i></h5>
               </div>
               <p>{{chat.email}}</p>
-              <!-- <p><i>{{chat.address.country}} - {{chat.address.city}}</i></p> -->
           </li>
         </ul>
       </div>
@@ -16,12 +17,7 @@
       <div class="col-sm-8">
         <div class="chatbody">
   
-          <!-- <table class="table">
-            <tr  *ngFor = "let i = index; let message of chat">
-              <td>{{message.content}}</td>
-              <td>{{message.createdTime}}</td>
-            </tr>
-          </table> -->
+
 
           <div class="msg_history">
             <div *ngFor = "let i = index; let message of chat | paginate: { itemsPerPage: 20, currentPage: p }">

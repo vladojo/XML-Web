@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,19 +7,10 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  public loggedIn: boolean = false;
 
-  constructor(/*private authService: AuthService,*/ private router: Router){
-    let res = localStorage.getItem('token');
-    if(res != null){
-      this.loggedIn = true;
-    }
+  constructor( ){
   }
 
-  logOut(){
-    //this.authService.logout();
-    this.loggedIn = false;
-    this.router.navigate(['login']);
-  }
+ 
   
 }

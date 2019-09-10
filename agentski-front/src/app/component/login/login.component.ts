@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
               console.log(res);
               localStorage.setItem('korisnik', JSON.stringify(res));
               this.logovaniKorisnik = res;
-              alert('uspesno');
+              this.router.navigate(['housing-unit-view']);
             }
           )
         }

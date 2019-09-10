@@ -15,6 +15,7 @@ import com.megatravel.agentskaaplikacija.model.HousingUnit;
 import com.megatravel.agentskaaplikacija.model.Reservation;
 import com.megatravel.agentskaaplikacija.repositories.HousingUnitsRepository;
 import com.megatravel.agentskaaplikacija.repositories.ReservationsRepository;
+import com.megatravel.agentskaaplikacija.soap.communication.SmestajCommunication;
 
 @Service
 public class ReservationsService {
@@ -28,6 +29,9 @@ public class ReservationsService {
 	@Autowired
 	private HousingUnitsRepository housingUnitsRepository;
 
+	@Autowired
+	private SmestajCommunication smestajCommunication;
+	
 	public Reservation createReservation(ReservationDTO reservationDTO) {
 		Optional<HousingUnit> unit = this.housingUnitsRepository.findById(reservationDTO.getUnit().getId());
 		if(!unit.isPresent()) {
@@ -46,6 +50,7 @@ public class ReservationsService {
 					reservation.setPrice(unit.get().getPrice() * (end.getTime() - start.getTime()) / 86400000);
 					reservation.setRating(null);
 					reservation.setUser(null);
+					this.smestajCommunication.addReservation(reservationDTO);
 					return this.reservationsRepository.save(reservation);
 				} else {
 					throw new ResponseStatusException(HttpStatus.CONFLICT);
